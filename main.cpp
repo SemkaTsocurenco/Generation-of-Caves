@@ -1,18 +1,15 @@
 #include "Cave_struct.h"
+#include "Gen_settings.h"
 
 
 using value_type = int;
 
-struct GenerationSettings {
-	value_type rows, cols;
-	value_type live_chance;
-	value_type generation_count;
-	std::pair <value_type, value_type> live_limit, born_limit;
-};
-
 int main (){
+	GenerationSettings settings;
+	settings.read_settings("../config.csv");
+
 	DMatrix<kCave> cave;
-	cave.InitializeCave(10 ,12, 40);
+	cave.InitializeCave(settings.rows ,settings.cols, settings.live_chance);
 	cave.print();
 
 	return 0;
