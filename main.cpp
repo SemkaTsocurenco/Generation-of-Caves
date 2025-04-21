@@ -1,10 +1,35 @@
-#include <iostream>
+#include "Cave_struct.h"
+
+
+
+struct GenerationSettings {
+	int rows, cols;
+	int live_chance;
+	int generation_count;
+	std::pair <int, int> live_limit, born_limit;
+};
+
 
 
 int main (){
-	for (int i = 30 ; ; i++ ){
-		std::cout<<"\r\33["<<std::to_string(i)<<"mCave Generation!"<<std::flush;
-		i = (i>36) ? (30) : (i + 1);
-	}
+
+
+
+	DMatrix<kCave> cave;
+	cave.rows = 10;
+	cave.cols = 12;
+
+	cave.data.resize(cave.cols * cave.rows);
+
+	cave(2, 5) = 1;
+	cave(2, 6) = 1;
+	cave(2, 7) = 1;
+	cave(3, 5) = 1;
+	cave(3, 7) = 1;
+	cave(11, 11) = 1;
+	std::cout<<cave(2, 5)<<"   ,"<< cave(11,11)<<"\n";
+
+	cave.print();
+
 	return 0;
 }
