@@ -13,12 +13,12 @@
 
 struct GenerationSettings {
     using value_type = int;
-    value_type rows   = 10;
-    value_type cols   = 10;
-    value_type live_chance      = 40;
-    value_type generation_count = 20;
-    std::pair<value_type, value_type> live_limit  = {0, 3};
-    std::pair<value_type, value_type> born_limit  = {0, 4};
+    value_type rows   = 30;
+    value_type cols   = 30;
+    value_type live_chance      = 49;
+    value_type generation_count = 30;
+    std::pair<value_type, value_type> live_limit  = {4, 8};
+    std::pair<value_type, value_type> born_limit  = {5, 8};
 
     bool read_settings(const std::string& config_file) {
         std::ifstream in(config_file);

@@ -51,7 +51,14 @@ int main (){
 	GenerationSettings settings;
 	DMatrix<kCave> cave;
 	cave = Generate(settings);
+
 	cave.print();
 
+	std::string name = "../my_cave.txt";
+	if (!cave.save_cave(name)) {
+		std::cerr << "\33[31mНе удалось сохранить пещеру в файл\n";
+	} else {
+		std::cout<< "\n\n\33[32m Файл с генерацией успешно создан по пути "<<name<<"\n\n";
+	}
 	return 0;
 }
