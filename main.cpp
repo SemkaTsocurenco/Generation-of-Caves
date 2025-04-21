@@ -16,7 +16,14 @@ value_type CountLiveNeigbors(value_type row, value_type col, const DMatrix<kCave
 
 DMatrix<kCave> Generate(GenerationSettings &s) {
 	
-	s.read_settings("../config.csv");
+	std::string name = "../config.csv";
+	if (s.read_settings(name)){
+		std::cout<<"\nПуть до файла настроек : \33[33m"<< name<<"\n\33[0m";
+		s.print();
+		std::cout<<"\33[32mФайл настроек генерации успешно прочитан! \33[0m\n\n\n";
+	} else {
+		std::cout<<"\n\33[31mФайл настроек не прочитан! \n\n\n";
+	}
 
     DMatrix<kCave> cave;
 	cave.InitializeCave(s.rows ,s.cols, s.live_chance);

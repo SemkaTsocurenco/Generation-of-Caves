@@ -54,6 +54,10 @@ template<> struct DMatrix<kCave> {
 			std::cout << '\n';
 		}
 	}
+
+    bool save_cave(std::string& fileName){
+
+    }
     
     void InitializeCave(value_type rows, value_type cols, value_type live_chance){
         std::default_random_engine DRE(std::chrono::system_clock::now().time_since_epoch().count());

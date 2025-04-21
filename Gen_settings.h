@@ -6,10 +6,10 @@
 #include <iomanip>
 #include <chrono>
 #include <algorithm>
-#include <fstream>    
-#include <sstream>    
+#include <fstream>
+#include <sstream>
 #include <string>
-#include <cctype>     
+#include <cctype>
 
 struct GenerationSettings {
     using value_type = int;
@@ -19,7 +19,6 @@ struct GenerationSettings {
     value_type generation_count = 20;
     std::pair<value_type, value_type> live_limit  = {0, 3};
     std::pair<value_type, value_type> born_limit  = {0, 4};
-
 
     bool read_settings(const std::string& config_file) {
         std::ifstream in(config_file);
@@ -38,7 +37,6 @@ struct GenerationSettings {
         std::string line;
         if (!std::getline(in, line)) 
             return false;
-
         if (!std::getline(in, line)) 
             return false;
 
@@ -46,7 +44,7 @@ struct GenerationSettings {
         std::stringstream ss(line);
         std::string token;
         while (std::getline(ss, token, ',')) {
-            // удаляем пробелы по краям
+            // убираем пробелы
             while (!token.empty() && std::isspace(token.front())) token.erase(token.begin());
             while (!token.empty() && std::isspace(token.back()))  token.pop_back();
             tokens.push_back(token);
@@ -54,7 +52,6 @@ struct GenerationSettings {
         if (tokens.size() < 8)
             return false;
 
-        // 4) Конвертируем в числа
         rows             = std::stoi(tokens[0]);
         cols             = std::stoi(tokens[1]);
         live_chance      = std::stoi(tokens[2]);
@@ -67,11 +64,20 @@ struct GenerationSettings {
         return true;
     }
 
-
+    void print(std::ostream& os = std::cout) const {
+        const int labelW = 20;
+        os << "\n\33[34mGeneration Settings:\n";
+        os << std::string(labelW + 10, '-') << "\n";
+        os << std::left << std::setw(labelW) << "Rows"               << ": \33[0m" << rows   << "\33[34m\n";
+        os << std::left << std::setw(labelW) << "Cols"               << ": \33[0m" << cols   << "\33[34m\n";
+        os << std::left << std::setw(labelW) << "Live chance (%)"    << ": \33[0m" << live_chance      << "\33[34m\n";
+        os << std::left << std::setw(labelW) << "Generations count"  << ": \33[0m" << generation_count << "\33[34m\n";
+        os << std::left << std::setw(labelW) << "Live neighbours ["   << ": [\33[0m"
+           << live_limit.first << ", " << live_limit.second << "\33[34m]\n";
+        os << std::left << std::setw(labelW) << "Born neighbours ["   << ": [\33[0m"
+           << born_limit.first << ", " << born_limit.second << "\33[34m]\n";
+        os << std::string(labelW + 10, '-') << "\n\n";
+    }
 };
-
-
-
-
 
 #endif // GEN_SETTINGS_H
