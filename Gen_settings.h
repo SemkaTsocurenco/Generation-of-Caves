@@ -17,8 +17,8 @@ struct GenerationSettings {
     value_type cols   = 10;
     value_type live_chance      = 40;
     value_type generation_count = 20;
-    std::pair<value_type, value_type> live_limit  = {0, 100};
-    std::pair<value_type, value_type> born_limit  = {0, 100};
+    std::pair<value_type, value_type> live_limit  = {0, 3};
+    std::pair<value_type, value_type> born_limit  = {0, 4};
 
 
     bool read_settings(const std::string& config_file) {

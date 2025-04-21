@@ -42,13 +42,13 @@ template<> struct DMatrix<kCave> {
 			for (std::size_t col = 0 ; col < cols; col ++){
 				int v = (*this) (row, col);
 				if ( v == 1){
-					std::cout << std::setw(3) << '#';
+					std::cout << std::setw(2) << '#';
 				}
 				else if ( v == 0){
-					std::cout << std::setw(3) << '.';
+					std::cout << std::setw(2) << ' ';
 				}
 				else {
-                    std::cout << std::setw(3) << v;
+                    std::cout << std::setw(2) << v;
                 }
 			}
 			std::cout << '\n';
