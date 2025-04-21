@@ -4,7 +4,9 @@
 #include <vector>
 #include <iostream>
 #include <iomanip>
-
+#include <chrono> 
+#include <algorithm>
+#include <random>
 
 enum Kind{
 	kCave,
@@ -16,9 +18,11 @@ struct DMatrix {
 };
 
 
+
 template<> struct DMatrix<kCave> {
 	using value_type = int;
 	using data_type = std::vector<value_type>;
+    using return_type = DMatrix<kCave>;
 
 	data_type data;
 	value_type rows = 0, cols = 0;
@@ -50,7 +54,26 @@ template<> struct DMatrix<kCave> {
 			std::cout << '\n';
 		}
 	}
+    
+    void InitializeCave(value_type rows, value_type cols, value_type live_chance){
+        std::default_random_engine DRE(std::chrono::system_clock::now().time_since_epoch().count());
+        std::uniform_int_distribution <value_type> dist(0, 100);
+        this->rows = rows;
+        this->cols = cols;
+        data.resize(rows * cols);
+        std::generate(data.begin(), data.end(), [&dist, &DRE, live_chance] {
+            value_type chance = dist(DRE);
+            return chance <= live_chance ? 1 : 0;
+        });
+
+    };
 
 };
+
+
+
+
+
+
 
 #endif // CAVE_STRUCT_H

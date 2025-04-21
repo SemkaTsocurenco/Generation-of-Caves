@@ -1,34 +1,18 @@
 #include "Cave_struct.h"
 
 
+using value_type = int;
 
 struct GenerationSettings {
-	int rows, cols;
-	int live_chance;
-	int generation_count;
-	std::pair <int, int> live_limit, born_limit;
+	value_type rows, cols;
+	value_type live_chance;
+	value_type generation_count;
+	std::pair <value_type, value_type> live_limit, born_limit;
 };
 
-
-
 int main (){
-
-
-
 	DMatrix<kCave> cave;
-	cave.rows = 10;
-	cave.cols = 12;
-
-	cave.data.resize(cave.cols * cave.rows);
-
-	cave(2, 5) = 1;
-	cave(2, 6) = 1;
-	cave(2, 7) = 1;
-	cave(3, 5) = 1;
-	cave(3, 7) = 1;
-	cave(11, 11) = 1;
-	std::cout<<cave(2, 5)<<"   ,"<< cave(11,11)<<"\n";
-
+	cave.InitializeCave(10 ,12, 40);
 	cave.print();
 
 	return 0;
