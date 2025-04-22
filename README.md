@@ -126,3 +126,7 @@ rows,cols,live_chance,generation_count,live_limit_min,live_limit_max,born_limit_
 ###     ######################
 ####   #######################
 ```
+
+
+![изображение](https://github.com/user-attachments/assets/880cdcbb-b1ff-4c3f-b69d-5bb7c7eaa555)
+
